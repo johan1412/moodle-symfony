@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello Student!{% endblock %}
+
+{% block body %}
+
+<div class="text-center">
+    <h1 class="my-5">Your subjects</h1>
+</div>
+
+<div class="card-deck row px-5" style="color:black;">
+    {% for key, exercises in exercisesBySubject %}
+        <div class="col-lg-4 col-md-4 col-sm-12 px-0 py-2">
+            <div class="card">
+                <div class="card-body p-4 text-center">
+                    <h4 class="card-title">{{ key }}</h4>
+                    <p class="card-text mt-4 mb-4"> {{ exercises | length }} exercice(s) disponible(s)</p>
+                    <a href="{{ path('student_exercise_list', {'subject': exercises[0].subject.id}) }}"><button class="btn btn-info">show</button></a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

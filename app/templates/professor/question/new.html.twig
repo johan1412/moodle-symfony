@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Question{% endblock %}
+
+{% block body %}
+    <h1 class="my-5 text-center">Create new Question</h1>
+
+    <div class="row">
+        <div class="col-md-2">
+            <a href="{{ path('professor_exercise_show',{'id' : exercice}) }}" class="btn btn-secondary"><< Back</a>
+        </div>
+        <div class="col-md-8">
+            <form method="post" action="{{ path('professor_question_new', {'id' : exercice}) }}">
+                <label>Name :</label>
+                <input name="name" type="text" class="form-control" required>
+                <label>Description :</label>
+                <input name="description" type="text" class="form-control" required>
+                <label>Difficulty :</label>
+                <input name="difficulty" type="text" class="form-control" required>
+                <label>Type :</label>
+                <select name="type" type="text" class="form-control type-select" required>
+                    <option value="qcm">QCM</option>
+                    <option value="libre">Libre</option>
+                </select>
+                <label>Answer :</label>
+                <input name="answer" type="text" class="form-control" required><br><br>
+
+                <div class="other-answers">
+                    <h4>Other answers :</h4>
+                    <label>Other answer 1 :</label>
+                    <input name="answer1" type="text" class="form-control">
+                    <div class="added-answers"></div>
+                </div>
+                <div class="btn btn-primary btn-add-answer" style="margin : 10px 0 10px 0;">Add answer</div>
+                <br>
+                <input class="btn btn-info" type="submit">
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

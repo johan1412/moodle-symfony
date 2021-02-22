@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Professors{% endblock %}
+
+{% block body %}
+     <h1 class="my-5 text-center">Class {{group.name}}</h1>
+
+    <div class="row">
+        <div class="col-md-10 offset-md-1 col-sm-12">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for exercise in exercises %}
+            <tr>
+
+                <td>{{ exercise.name }}</td>
+                <td>{{ exercise.description }}</td>
+                <td>{{ exercise.subject.name }}</td>
+                 <td>
+                    <form method="post" action="{{ path('professor_exercise_remove', {'group': group.id,'exercise': exercise.id}) }}" onsubmit="return confirm('Are you sure you want to remove this exercise?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('remove' ~ exercise.id) }}">
+                        <button class="btn btn-danger">Remove</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">No Professor Found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

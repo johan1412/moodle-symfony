@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Profile' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-6 mx-auto text-center">
+            <h1 class="my-5">Profile</h1>
+
+            <img src="{{asset('build/images/Moodle.png')}}" alt="{{ app.user.fullName }}'s Avatar" class="shadow rounded-circle w-50">
+
+            <p class="mt-3 lead">{{ app.user.email }}</p>
+
+            <hr>
+
+            <h2>{{ app.user.fullName }}</h2>
+
+
+            <p>
+                <a href="{{ path('admin_account_edit') }}">Edit Account</a> | 
+                <a href="{{ path('admin_account_change_password') }}">Change Password</a>
+            </p>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+
+<h2 class="mb-4" style="margin-top:110px;">Comments :</h2>
+
+<form method="post" action="{{ path('student_comment_new', {'id': exercise.id}) }}" id="formComment">
+    <div class="form-group row">
+        <input id="commentInput" type="text" class="col-8 form-control" name="commentInput" placeholder="new comment" required/>
+        <input id="exerciseId" type="hidden" name="exerciseId" value="{{ exercise.id }}" />
+        <button class="col-2 btn btn-primary ml-3">add comment</button>
+    </div>
+</form>
+
+<div id="comments" class="comments">
+    {% for comment in exercise.comments %}
+        <div class="my-3" style="border-left: 1px solid grey; padding: 0px 30px;">
+            <strong>{{ comment.users.firstName }} {{  comment.users.lastName }} : </strong>
+            <p>{{ comment.text }}</p>
+        </div>
+    {% else %}
+        <p colspan="3">no comments for this exercise</p>
+    {% endfor %}
+</div>
+

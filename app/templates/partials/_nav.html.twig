@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+    <a class="nav-link" href="{{path('accueil')}}"><img id="logo" src="{{asset('build/images/Moodle.png')}}" class="shadow rounded-circle " ></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExample02">
+        {% if app.user %}
+            {% if app.user.roles[0] == "ROLE_ADMIN" %}
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{path('admin_professor_index')}}">Professors</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{path('admin_subject_index')}}">Subjects</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{path('admin_group_index')}}">Classes</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{path('admin_student_index')}}">Students</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                            <a class="nav-link px-2" href="{{ path('admin_account_show') }}">Account</a>
+                    </li>
+                    <li class="nav-item active">
+                            <a class="nav-link px-2" href="{{path('app_logout')}}">Logout</a>
+                    </li>
+                </ul>
+            {% elseif app.user.roles[0] == "ROLE_PROFESSOR" %}
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{path('professor_group_index',{'id': app.user.id})}}">Classes</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{path('professor_exercise_index',{'id':app.user.id})}}">Exercise</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                            <a class="nav-link px-2" href="{{ path('professor_account_show') }}">Account</a>
+                    </li>
+                    <li class="nav-item active">
+                            <a class="nav-link px-2" href="{{path('app_logout')}}">Logout</a>
+                    </li>
+                </ul>
+            {% else %}
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link px-2" href="{{ path('student_exercise_index') }}">Exercices</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                            <a class="nav-link px-2" href="{{ path('student_account_show') }}">Account</a>
+                    </li>
+                    <li class="nav-item active">
+                            <a class="nav-link px-2" href="{{path('app_logout')}}">Logout</a>
+                    </li>
+                </ul>
+            {% endif %}
+        {% else %}
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link px-2" href="{{ path('app_login') }}">Login</a>
+                </li>
+            </ul>
+        {% endif %}
+    </div>
+</nav>

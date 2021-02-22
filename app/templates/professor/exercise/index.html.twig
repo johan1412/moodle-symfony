@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Exercise index{% endblock %}
+
+{% block body %}
+    {% if app.user.subject %}
+        <h1 class="my-5 text-center">Exercise Of {{ app.user.subject.name}}</h1>
+
+        <div class="row">
+            <div class="col-md-10 offset-md-1 col-sm-12">
+                <a href="{{ path('professor_exercise_new',{'id': app.user.subject.id}) }}" class="btn btn-info mb-3">Create new</a>
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            {# <th>Id</th> #}
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Subject</th>
+                            <th>actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for exercise in exercises %}
+                        <tr>
+                            {# <td>{{ exercise.id }}</td> #}
+                            <td>{{ exercise.name }}</td>
+                            <td>{{ exercise.description }}</td>
+                            <td>{{ exercise.subject.name }}</td>
+                            <td>
+                                <a href="{{ path('professor_exercise_show', {'id': exercise.id}) }}" class="btn btn-info">Show</a>
+                                <a href="{{ path('professor_exercise_edit', {'id': exercise.id}) }}" class="btn btn-info">Edit</a>
+                                <a href="{{ path('professor_question_new', {'id': exercise.id}) }}" class="btn btn-info">Add question</a>
+                                        <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#example{{exercise.id}}">
+                                Add to Class
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="example{{exercise.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">List Classes</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <ul class="list-group">
+                                    {% for group in groups %}
+                                        {% if not containProfessor(exercise.id,group.exercises) %} 
+                                            <li class="list-group-item">
+                                                <a href="{{ path('professor_exercise_group_new', {'exercise':exercise.id ,'group': group.id,'professor':app.user.id}) }}" class="btn btn-info">{{ group.name }} </a>
+                                            </li>
+                                        {% endif %}
+                                    {% else %}
+                                            <li class="list-group-item">No Group Found</li>
+                                    {% endfor %}
+                                        </ul>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">No Records Found !!</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% else %}
+        <h1 class="my-5 text-center">No Subject recorded</h1>
+    {% endif %}
+{% endblock %}

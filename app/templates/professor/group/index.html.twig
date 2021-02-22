@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Classes index{% endblock %}
+
+{% block body %}
+<h1 class="my-5 text-center">Classes</h1>
+
+    <div class="row">
+        <div class="col-md-10 offset-md-1 col-sm-12">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for group in groups %}
+            <tr>
+                <td>{{ group.name }}</td>
+                <td>
+                    <a href="{{ path('professor_student_group_index', {'id': group.id}) }}" class="btn btn-info">Students</a>
+                    <a href="{{ path('professor_exercise_group_index', {'id': group.id}) }}" class="btn btn-info">Exercises</a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Class{% endblock %}
+
+{% block body %}
+    <h1 class="my-5 text-center">Create new Class</h1>
+
+    <div class="row">
+        <div class="col-md-2">
+            <a href="{{ path('admin_group_index') }}" class="btn btn-secondary"><< back to list</a>
+        </div>
+        <div class="col-md-8">
+            {{ include('admin/group/_form.html.twig') }}
+        </div>
+    </div>
+
+{% endblock %}

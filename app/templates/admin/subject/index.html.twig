@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Subject index{% endblock %}
+
+{% block body %}
+    <h1 class="my-5 text-center">Subject index</h1>
+
+    <div class="row">
+        <div class="col-md-10 offset-md-1 col-sm-12">
+            <a href="{{ path('admin_subject_new') }}" class="btn btn-info mb-3">Add new</a>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Name</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for subject in subject %}
+                    <tr>
+                        <td>{{ subject.name }}</td>
+                        <td>
+                            <a href="{{ path('admin_subject_show', {'id': subject.id}) }}" class="btn btn-info">Show</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">No Records Found !!</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

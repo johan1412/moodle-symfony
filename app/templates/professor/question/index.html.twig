@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Question index{% endblock %}
+
+{% block body %}
+    <h1 class="my-5 text-center">Question index: </h1>
+
+    <div class="row">
+        <div class="col-md-10 offset-md-1 col-sm-12">
+            <a href="{{ path('professor_question_new') }}" class="btn btn-info mb-3">Add new</a>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Difficulty</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for question in questions %}
+                    <tr>
+                        <td>{{ question.id }}</td>
+                        <td>{{ question.name }}</td>
+                        <td>{{ question.description }}</td>
+                        <td>{{ question.difficulty }}</td>
+                        <td>
+                            <a href="{{ path('professor_question_show', {'id': question.id}) }}" class="btn btn-info">Show</a>
+                            <a href="{{ path('professor_question_edit', {'id': question.id}) }}" class="btn btn-info">Edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

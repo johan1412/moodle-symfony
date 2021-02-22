@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Subject{% endblock %}
+
+{% block body %}
+    <h1 class="my-5 text-center">Create new Subject</h1>
+
+    <div class="row">
+        <div class="col-md-2">
+            <a href="{{ path('admin_subject_index') }}" class="btn btn-secondary"><< Back</a>
+        </div>
+        <div class="col-md-8">
+            {{ include('admin/subject/_form.html.twig') }}
+        </div>
+    </div>
+    
+{% endblock %}

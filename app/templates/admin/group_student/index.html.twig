@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Students{% endblock %}
+
+{% block body %}
+     <h1 class="my-5 text-center">Class {{group.name}}</h1>
+
+    <div class="row">
+        <div class="col-md-10 offset-md-1 col-sm-12">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    <form method="post" action="{{ path('admin_student_remove', {'group': group.id,'student': user.id}) }}" onsubmit="return confirm('Are you sure you want to remove this item?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('remove' ~ user.id) }}">
+                        <button class="btn btn-danger">Remove</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">No Students Found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,30 @@
+controllers_admin:
+    resource: ../../src/Controller/Admin
+    type: annotation
+    prefix: /admin
+    name_prefix: admin_
+
+controllers_student:
+    resource: ../../src/Controller/Student
+    type: annotation
+    prefix: /student
+    name_prefix: student_
+
+controllers_professeur:
+    resource: ../../src/Controller/Professor
+    type: annotation
+    prefix: /professor
+    name_prefix: professor_
+
+
+controllers_security:
+    resource: ../../src/Controller/Security
+    type: annotation
+
+controllers_accueil:
+    resource: ../../src/Controller/Accueil
+    type: annotation
+
+kernel:
+    resource: ../../src/Kernel.php
+    type: annotation

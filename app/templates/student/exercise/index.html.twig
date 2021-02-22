@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Exercise index{% endblock %}
+
+{% block body %}
+
+    <div class="row my-5">
+        {% if exercises is defined %}
+            <div class="col-md-10 offset-md-1 col-sm-12">
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        {# <th>Id</th> #}
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Subject</th>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for exercise in exercises %}
+                        <tr>
+                            {# <td>{{ exercise.id }}</td> #}
+                            <td>{{ exercise.name }}</td>
+                            <td>{{ exercise.description }}</td>
+                            <td>{{ exercise.subject.name }}</td>
+                            {% if app.user in exercise.solvedBy %}
+                                <td><a href="{{ path('student_exercise_show', {'id' : exercise.id}) }}"><button class="btn btn-primary">Results</button></a></td>
+                            {% else %}
+                                <td><a href="{{ path('student_exercise_show', {'id' : exercise.id}) }}"><button class="btn btn-primary">Show</button></a></td>
+                            {% endif %}
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">No Records Found !!</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <h2 style="text-align: center; width: 100%">No class assigned</h2>
+        {% endif %}
+    </div>
+{% endblock %}
